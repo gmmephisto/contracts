@@ -48,3 +48,9 @@ test-parallel-stop:
 test-coverage:
 	$(nose) $(package) $(NOSE_PARAMS) $(nose_coverage) 
 
+MAIN_TREE := HEAD
+MAIN_COMMIT := $(shell git rev-parse --verify $(MAIN_TREE))
+PROG := contracts
+
+sources:
+	@git archive --format=tar --prefix="$(PROG)/" $(MAIN_COMMIT) | gzip > "$(PROG).tar.gz"
